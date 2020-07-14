@@ -1,0 +1,73 @@
+/* Square styling */
+
+.board-row:after {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+.square {
+    background: none;
+    border: 5px solid black;
+    float: left;
+    font-family: 'Short Stack', cursive;
+    font-size: 90px;
+    font-weight: bold;
+    line-height: 34px;
+    height: 100px;
+    width: 100px;
+    margin: -1px;
+    padding: 0;
+    text-align: center;
+}
+
+.square:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.square:focus {
+    outline: none;
+}
+
+/* Game board styling */
+
+.game-board{
+    border: 5px solid black;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 294px;
+    width: 294px;
+}
+
+.win0 {
+    background-image: url(../Images/bg0.png);
+}
+
+.win1 {
+    background-image: url(../Images/bg1.png);
+}
+
+.win2 {
+    background-image: url(../Images/bg2.png);
+}
+
+.win3 {
+    background-image: url(../Images/bg3.png);
+}
+
+.win4 {
+    background-image: url(../Images/bg4.png);
+}
+
+.win5 {
+    background-image: url(../Images/bg5.png);
+}
+
+.win6 {
+    background-image: url(../Images/bg6.png);
+}
+
+.win7 {
+    background-image: url(../Images/bg7.png);
+}

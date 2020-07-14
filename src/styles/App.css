@@ -1,0 +1,15 @@
+body {
+  background-image: url(../Images/paperbg.jpg);
+  background-attachment: fixed;
+}
+
+nav {
+  background-color: teal;
+}
+
+.Body h1{
+  font-size: 70px;
+  text-align: center;
+  margin: 50px 0 50px;
+  font-family: 'Pangolin', cursive;
+} 

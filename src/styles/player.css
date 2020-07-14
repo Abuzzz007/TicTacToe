@@ -1,0 +1,218 @@
+/* Game info */
+
+.status {
+  font-size: 40px;
+}
+
+#New_Game_div {
+  margin: auto;
+  margin-top: 20px;
+  width: 153px;
+}
+
+#New_Game {    
+  font-family: 'Waiting for the Sunrise', cursive;
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
+  width: 153px;
+  background: none;
+  box-shadow: 4px 4px 4px 0 black;
+}
+
+.moves {
+  display: flex;
+  flex-direction: row;
+  font-size: 30px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.moves div {
+  width: 50px;
+  height: 50px;
+  margin: auto;
+}
+
+.moves button {
+  background: none;
+  width: 50px;
+  height: 50px;
+  box-shadow: 4px 4px 4px 0;
+  border-radius: 100%;
+  border: none;
+}
+
+.moves span {
+  margin: auto;
+}
+
+#left {
+  background-image: url(../Images/leftbg.png);
+  background-position: center;
+  background-size: contain;
+}
+
+#right {
+  background-image: url(../Images/rightbg.png);
+  background-position: center;
+  background-size: contain;
+}
+
+.moves button:active, #New_Game:active {
+  box-shadow: none;
+  margin: 0 4px 0 4px;
+  outline: none;
+}
+
+.moves button:focus, #New_Game:focus {
+  outline: none;
+}
+
+.game-info {
+  width: 230px;
+  font-family: 'Waiting for the Sunrise', cursive;
+  font-weight: bold;
+  margin-left: 40px;
+  padding: 20px;
+  text-align: center;
+  background-image: url(../Images/paperbg1.jpg);
+  box-shadow: 2px 2px 2px 0 black;
+}
+
+/* Basic game structure */
+
+.game {
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}  
+
+/* Media queries */
+
+@media (max-width: 670px) {
+  .square {
+    height: 85px;
+    width: 85px;
+    font-size: 75px;
+  }
+  
+  .game-board {
+    height: 249px;
+    width: 249px;
+  }
+
+  .Body h1 {
+    margin: 20px 0 20px;
+    font-size: 60px;
+  }
+
+  .game {
+    display: block;
+  }
+
+  .game-board {
+    margin: auto;
+  }
+
+  .game-info {
+    width: 200px;
+    margin: auto;
+    margin-top: 20px;
+    padding: 10px;
+  }
+
+  .status {
+    font-size: 30px;
+  }
+
+  #New_Game_div {
+    margin-top: 0;
+  }
+
+  #New_Game {
+    font-size: 20px;
+  }
+
+  .moves {
+    margin-top: 10px;
+  }
+
+  .moves span {
+    font-size: 20px;
+  }
+
+}
+
+@media (max-width: 320px) {
+  .Body h1 {
+    margin: 10px 0 10px;
+    font-size: 60px;
+  }
+
+  .moves div {
+    width: 45px;
+    height: 45px;
+  }
+
+  .moves button {
+    width: 45px;
+    height: 45px;
+  }
+
+}
+
+@media (max-height: 580px) {
+  .Body h1 {
+    margin: 0 0 10px;
+    font-size: 50px;
+  }
+
+  .square {
+    height: 75px;
+    width: 75px;
+    font-size: 65px;
+  }
+  
+  .game-board {
+    height: 219px;
+    width: 219px;
+  }
+
+  .moves div {
+    width: 35px;
+    height: 35px;
+  }
+
+  .moves button {
+    width: 35px;
+    height: 35px;
+  }
+
+  .game-info {
+    width: 200px;
+    padding: 10px;
+  }
+
+  .status {
+    font-size: 30px;
+  }
+
+  #New_Game_div {
+    margin-top: 0;
+  }
+
+  #New_Game {
+    font-size: 20px;
+  }
+
+  .moves {
+    margin-top: 10px;
+  }
+
+  .moves span {
+    font-size: 20px;
+  }
+
+}
