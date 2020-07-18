@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
-class login extends React.Component {
+class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -21,13 +21,13 @@ class login extends React.Component {
         this.setState({logged: true});
         event.preventDefault();
         localStorage.setItem('Username',this.state.value);
-        window.location.reload();
+        this.props.setUser(localStorage.getItem('Username'));
     }
 
     Logout() {
         this.setState({value: '', logged: true});
         localStorage.removeItem('Username',this.state.value);
-        window.location.reload();
+        this.props.setUser(localStorage.getItem('Username'));
     }
 
     render() {
@@ -55,4 +55,4 @@ class login extends React.Component {
     }
 }
 
-export default login;
+export default withRouter(Login);

@@ -1,7 +1,8 @@
 import React from 'react';
 import './styles/App.css';
+import Nav from './Pages/nav';
 import Home from './Pages/home';
-import login from './Pages/login';
+import Login from './Pages/login';
 import Gamesing from './Pages/singleplayer';
 import Gamemult from './Pages/multiplayer';
 import Online from './Pages/online';
@@ -10,9 +11,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
     const[socket, setSocket] = React.useState(null);
+    const[user, setUser] = React.useState(localStorage.getItem('Username'));
 
     const setupSocket = () => {
-        const user = localStorage.getItem('Username');
         if(user && !socket) {
             const newSocket = io('https://shrouded-taiga-23541.herokuapp.com/', {
               query: {
@@ -42,12 +43,13 @@ function App() {
     return (
         <Router>
             <div className="App">
+                <Nav user={user} />
                 <Switch>
                     <Route path='/' exact component={Home} />
-                    <Route path='/login' exact component={login} />
+                    <Route path='/login' exact render={() => <Login setUser={setUser} />} />
                     <Route path='/single' exact component={Gamesing} />
                     <Route path='/multi' exact component={Gamemult} />
-                    <Route path='/online' exact render={() => <Online socket={socket}/>} />
+                    <Route path='/online' exact render={() => <Online socket={socket} />} />
                 </Switch>
             </div>
         </Router>

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const logcheck = () => {
+const logcheck = (props) => {
     const log = [];
-    if(localStorage.getItem('Username')) {
+    if(props.user) {
         log.push (
-        <div key="log-info">Welcome, {localStorage.getItem('Username')}</div>
+        <div key="log-info">Welcome, {props.user}</div>
         )
     } else {
         log.push (
@@ -17,12 +17,12 @@ const logcheck = () => {
     return(log);
 }
 
-function Nav() {
+function Nav(props) {
     return(
         <div>
             <nav>
                 <Link to='/'><h1>TicTacToe</h1></Link>
-                {logcheck()}
+                {logcheck(props)}
             </nav>
         </div>
     );
