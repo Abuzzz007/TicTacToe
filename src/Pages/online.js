@@ -6,6 +6,7 @@ import Chat from '../Controllers/chat';
 import calculateWinner from '../Controllers/calculateWinner';
 import makeToast from '../Controllers/Toast';
 import Loading from '../Controllers/loading';
+import '../styles/online.css';
 
 Modal.setAppElement('#root');
 
@@ -21,7 +22,6 @@ class Online extends React.Component {
             messages: [],
             JoinroomModal: false,
             CreateroomModal: false,
-            NewgameModal: true,
             ChatModal: false,
             XorO: '',
             move: true
@@ -135,8 +135,14 @@ class Online extends React.Component {
             return;
         }
         squares[i] = this.state.XorO;
-        this.setState({squares: squares});
         this.updatesquare();
+    }
+
+    //listening for other user leaving room
+    leftroom() {
+        this.props.socket.on('leftroom', () => {
+            makeToast(this.state.username2 + ' has left the room');
+        });
     }
 
     //for starting new game
@@ -152,7 +158,7 @@ class Online extends React.Component {
     //listening for newmessages
     newmessage() {
         this.props.socket.on('newMessage', (message) => {
-            const messages = [...this.state.messages,message];
+            const messages = [message,...this.state.messages];
             this.setState({messages: messages});
             if(message.username === this.state.username2) {
                 makeToast(message.username + ' send a chat');
@@ -161,6 +167,7 @@ class Online extends React.Component {
     }
 
     componentDidMount() {
+        this.leftroom();
         this.newgame();
         this.newmessage();
         window.addEventListener('beforeunload', this.RoomCleanup);
@@ -181,7 +188,7 @@ class Online extends React.Component {
             winner = null;
             winstatus = null; 
         }
-        const gameclass = "game-board win" + winstatus;
+        const gameclass = "game-board game-board-online win" + winstatus;
 
         const handlewinner = () => {
             let winner_title;
@@ -194,10 +201,12 @@ class Online extends React.Component {
             }
 
             return(
-                <Modal isOpen={this.state.NewgameModal} contentLabel="Newgame">
-                    <h1>{winner_title}</h1>
-                    <span>Want a rematch?</span>
-                    <button onClick={() => this.props.socket.emit('Newgame', {RoomId: this.state.RoomId})}>New Game</button>
+                <Modal isOpen={true} contentLabel="Newgame" className="Modal">
+                    <div className="Modaldiv">
+                        <h1>{winner_title}</h1>
+                        <span>Want a rematch?</span>
+                        <button onClick={() => this.props.socket.emit('Newgame', {RoomId: this.state.RoomId})}>New Game</button>
+                    </div>
                 </Modal>
             );
         }
@@ -205,30 +214,33 @@ class Online extends React.Component {
         if(!this.state.RoomId) {
             return(
                 <div className="Online">
-                    <button onClick={() => {
+                    <button className='btn' onClick={() => {
                         this.CreateRoom();
                         this.setState({CreateroomModal: true});
                         }}>Create Room</button>
-                    <button onClick={() => this.setState({JoinroomModal: true})}>Join Room</button>
-                    <Modal isOpen={this.state.JoinroomModal} contentLabel="JoinRoom">
-                        <form onSubmit={this.JoinRoom}>
-                            <label>
-                                Room id:
-                                <input type="text" placeholder="Room id" value={this.state.value} onChange={this.handleChange} />
-                            </label>
-                            <button type="submit">Join</button>
-                        </form>
-                        <button onClick={() => this.setState({JoinroomModal: false})}>Close</button>
+                    <button className='btn' onClick={() => this.setState({JoinroomModal: true})}>Join Room</button>
+                    <Modal isOpen={this.state.JoinroomModal} contentLabel="JoinRoom" className="Modal">
+                        <div className="Modaldiv">
+                            <form onSubmit={this.JoinRoom}>
+                                <label>
+                                    Room id:
+                                    <input type="text" placeholder="Room id" value={this.state.value} onChange={this.handleChange} />
+                                </label>
+                                <button type="submit">Join</button>
+                            </form>
+                            <button onClick={() => this.setState({JoinroomModal: false})}>Close</button>
+                        </div>
                     </Modal>
                 </div>
             );
         } else if(!this.state.username2) {
             return(
                 <div className="Online">
-                    <Modal isOpen={this.state.CreateroomModal} contentLabel="CreateRoom">
-                        <div>
-                            Room id: {this.state.RoomId} waiting for other players...
+                    <Modal isOpen={this.state.CreateroomModal} contentLabel="CreateRoom" className="Modal">
+                        <div className="Modaldiv">
+                            Room id: {this.state.RoomId}
                             <Loading />
+                            Waiting for other players...
                             <button onClick={() => this.RoomCleanup()}>Cancel</button>
                         </div>
                     </Modal>
@@ -236,24 +248,30 @@ class Online extends React.Component {
             );
         } else {
             return(
-                <div className="Online">
-                    {this.state.username1} VS {this.state.username2}
+                <div className="Online-game">
+                    <div className='Players'>
+                        {this.state.username1} <span>VS</span> {this.state.username2}
+                    </div>
                     {winner ? '' : <div className="gameplayer">{this.state.move ? 'Your move' : 'Opponent\'s move'}</div>}
-                    <div className={gameclass}>
+                    <div className={gameclass} >
                         <Board 
                             squares={this.state.squares}
                             onClick={(i) => this.handleClick(i)}
                         />
                     </div>
-                    <button onClick={() => this.setState({ChatModal: true})}>Chat</button>
-                    <Modal isOpen={this.state.ChatModal} contentLabel="Chat" onRequestClose={() => this.setState({ChatModal: false})}>
-                        <Chat 
-                            RoomId={this.state.RoomId}
-                            username1={this.state.username1}
-                            username2={this.state.username2}
-                            messages={this.state.messages}
-                            socket={this.props.socket}
-                        />
+                    <button className='btn' onClick={() => this.setState({ChatModal: true})}>Chat</button>
+                    <Modal isOpen={this.state.ChatModal} contentLabel="Chat" onRequestClose={() => this.setState({ChatModal: false})} className="Modal">
+                        <h1>Chats</h1>
+                        <button onClick={() => this.setState({ChatModal: false})} id='Close-btn'>X</button>
+                        <div className="Modaldiv">
+                            <Chat 
+                                RoomId={this.state.RoomId}
+                                username1={this.state.username1}
+                                username2={this.state.username2}
+                                messages={this.state.messages}
+                                socket={this.props.socket}
+                            />
+                        </div>
                     </Modal>
                     {winner ? handlewinner(winner) : ''}
                 </div>

@@ -1,0 +1,29 @@
+nav {
+    background-image: url("../Images/paperbg2.jpg");
+    background-position: center;
+    color: white;
+    font-family: 'Pangolin', cursive;
+    display: flex;
+    flex-direction: row;
+}
+
+nav h1 {
+    margin: 20px;
+    font-size: 2em;
+}
+
+nav div {
+    height: 50px;
+    margin: auto;
+    margin-right: 20px;
+    text-align: center;
+}
+
+nav div img {
+    float: left;
+}
+
+nav h2 {
+    float: right;
+    margin: 10px;
+}

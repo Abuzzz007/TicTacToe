@@ -20,25 +20,29 @@ class Chat extends React.Component {
 
     Sendmessage(event) {
         event.preventDefault();
-        this.props.socket.emit('Newmessage', {
-            RoomId: this.state.RoomId,
-            username: this.state.username1,
-            message: this.state.value
-        });
+        if(this.state.value!=='') {
+            this.props.socket.emit('Newmessage', {
+                RoomId: this.state.RoomId,
+                username: this.state.username1,
+                message: this.state.value
+            });
+        }
         this.setState({value: ''});
     }
 
     render() {
         return(
             <div className="chatroom">
-                <h1>Chats</h1>
-                {this.props.messages.map((message, i) => (
-                    <div key={i} className="message">
-                        <span 
-                            className={message.username === this.state.username1 ? 'YourMessage' : 'PartnerMessage'}
-                        >{message.message}</span>
-                    </div>
-                ))}
+                <div className='messagebox'>
+                    {this.props.messages.map((message, i) => (
+                        <div key={i} 
+                            className={message.username === this.state.username1 ? 'YourMessagediv' : 'PartnerMessagediv'}>
+                            <span 
+                                className={message.username === this.state.username1 ? 'YourMessage' : 'PartnerMessage'}
+                            >{message.message}</span>
+                        </div>
+                    ))}
+                </div>
                 <form onSubmit={this.Sendmessage}>
                     <input type="text" placeholder="Say somethin!" value={this.state.value} onChange={this.handleChange} />
                     <button type="submit">Send</button>

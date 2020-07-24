@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import '../styles/login.css';
 
 class Login extends React.Component {
     constructor(props) {
@@ -21,13 +22,15 @@ class Login extends React.Component {
         this.setState({logged: true});
         event.preventDefault();
         localStorage.setItem('Username',this.state.value);
-        this.props.setUser(localStorage.getItem('Username'));
+        this.props.setUser(this.state.value);
+        this.props.setupSocket(this.state.value);
     }
 
     Logout() {
         this.setState({value: '', logged: true});
-        localStorage.removeItem('Username',this.state.value);
-        this.props.setUser(localStorage.getItem('Username'));
+        localStorage.removeItem('Username');
+        this.props.setUser(null);
+        this.props.setupSocket(null);
     }
 
     render() {

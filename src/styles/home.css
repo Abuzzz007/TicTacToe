@@ -1,0 +1,12 @@
+.Home {
+    margin: 15vh;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.Home button {
+    font-family: 'Pangolin', cursive;
+    margin: 20px;
+    font-size: 20px;
+}

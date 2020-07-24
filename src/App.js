@@ -13,7 +13,7 @@ function App() {
     const[socket, setSocket] = React.useState(null);
     const[user, setUser] = React.useState(localStorage.getItem('Username'));
 
-    const setupSocket = () => {
+    const setupSocket = (user) => {
         if(user && !socket) {
             const newSocket = io('https://shrouded-taiga-23541.herokuapp.com/', {
               query: {
@@ -36,7 +36,7 @@ function App() {
     };
 
     React.useEffect(() => {
-        setupSocket();
+        setupSocket(user);
         //eslint-disable-next-line
     }, []);
 
@@ -46,7 +46,7 @@ function App() {
                 <Nav user={user} />
                 <Switch>
                     <Route path='/' exact component={Home} />
-                    <Route path='/login' exact render={() => <Login setUser={setUser} />} />
+                    <Route path='/login' exact render={() => <Login setUser={setUser} setupSocket={setupSocket}/>} />
                     <Route path='/single' exact component={Gamesing} />
                     <Route path='/multi' exact component={Gamemult} />
                     <Route path='/online' exact render={() => <Online socket={socket} />} />

@@ -1,0 +1,138 @@
+.Online {
+    text-align: center;
+    margin-top: 15vh;
+}
+
+.Online-game {
+    text-align: center;
+    font-family: 'Pangolin', cursive;
+    font-size: 20px;
+    margin-top: 5vh;
+}
+
+.btn {
+    font-family: 'Pangolin', cursive;
+    font-size: 20px;
+    margin: 20px;
+}
+
+.Players {
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+.Players span {
+    font-size: 30px;
+    font-weight: normal;
+}
+
+.gameplayer {
+    margin-bottom: 20px;
+}
+
+.game-board-online{
+    margin: auto;
+}
+
+/* styling inside modal */
+.Modal {
+    font-family: 'Pangolin', cursive;
+    font-size: 20px;
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+    border: 1px solid rgb(204, 204, 204);
+    background: rgb(255, 255, 255);
+    overflow: auto;
+    border-radius: 4px;
+    outline: none;
+    padding: 20px;
+    text-align: center;
+}
+
+.Modaldiv {
+    margin-top: 5vh;
+}
+
+.Modal button {
+    font-family: 'Pangolin', cursive;
+    font-size: 20px;
+    margin: 20px;
+}
+
+.Modal input {
+    font-family: 'Pangolin', cursive;
+    font-size: 20px;
+    text-align: center;
+    width: 70px;
+}
+
+/* chat design */
+.Modal .chatroom {
+    margin-top: 60px;
+}
+
+.Modal .messagebox {
+    width: calc(100% - 10px);
+    margin: auto;
+    border: 2px solid black;
+    border-radius: 5px;
+    height: 50vh;
+    overflow: auto;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.Modal h1 {
+    float: left;
+    margin: 0;
+    font-size: 30px;
+}
+
+.Modal #Close-btn {
+    float: right;
+    font-family: 'Pangolin', cursive;
+    font-size: 30px;
+    margin: 0;
+    background: inherit;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.Modal .chatroom input {
+    text-align: center;
+    margin-top: 20px;
+    width: calc(100% - 200px);
+}
+
+.Modal .chatroom .YourMessagediv {
+    margin: 10px;
+    text-align: right;
+}
+
+.Modal .chatroom .PartnerMessagediv {
+    margin: 10px;
+    text-align: left;
+}
+
+.Modal .chatroom .YourMessage {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px 10px;
+}
+
+.Modal .chatroom .PartnerMessage {
+    border: 1px solid black;
+    border-radius: 10px;
+    color: white;
+    background-color: black;
+    padding: 5px 10px;
+}
+
+@media (max-width: 450px) {
+    .Modal .chatroom input {
+        width: 90%;
+    }
+}

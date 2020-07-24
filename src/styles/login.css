@@ -1,0 +1,17 @@
+.Login {
+    font-family: 'Pangolin', cursive;
+    margin-top: 15vh;
+    font-size: 30px;
+    text-align: center;
+}
+
+.Login button {
+    font-family: 'Pangolin', cursive;
+    font-size: 20px;
+    margin: 20px;
+}
+
+.Login input {
+    font-family: 'Pangolin', cursive;
+    font-size: 20px;
+}
