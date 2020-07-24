@@ -74,30 +74,30 @@ class Game extends React.Component {
     //     if(this.state.stepNumber > 0) {
     //       let title = (this.state.stepNumber - 1).toString();
     //       buttons.push(
-    //         <div key="left">
-    //           <button id="left" title={'Move #' + title} onClick={() => this.jumpTo(this.state.stepNumber - 1)}></button>
+    //         <div key='left'>
+    //           <button id='left' title={'Move #' + title} onClick={() => this.jumpTo(this.state.stepNumber - 1)}></button>
     //         </div>
     //       );
     //     } else {
-    //       buttons.push(<div key="left"></div>);
+    //       buttons.push(<div key='left'></div>);
     //     }
-    //     buttons.push(<span key="Move">Move #{this.state.stepNumber}</span>);
+    //     buttons.push(<span key='Move'>Move #{this.state.stepNumber}</span>);
     //     if(this.state.stepNumber < this.state.history.length - 1) {
     //       let title = (this.state.stepNumber + 1).toString();
     //       buttons.push(
-    //         <div key="right">
-    //           <button id="right" title={'Move #' + title} onClick={() => this.jumpTo(this.state.stepNumber + 1)}></button>
+    //         <div key='right'>
+    //           <button id='right' title={'Move #' + title} onClick={() => this.jumpTo(this.state.stepNumber + 1)}></button>
     //         </div>
     //       );
     //     } else {
-    //       buttons.push(<div key="right"></div>);
+    //       buttons.push(<div key='right'></div>);
     //     }
     //     return (
     //       <div>
-    //         <div id="New_Game_div" key="New_Game">
-    //           <button id="New_Game" onClick={() => this.newgame()}>New Game</button>
+    //         <div id='New_Game_div' key='New_Game'>
+    //           <button id='New_Game' onClick={() => this.newgame()}>New Game</button>
     //         </div>
-    //         <div className="moves">{buttons}</div>
+    //         <div className='moves'>{buttons}</div>
     //       </div>
     //     );
     //   } else {
@@ -112,18 +112,18 @@ class Game extends React.Component {
     // } else {
     //   status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     // }
-    // const gameclass = "game-board win" + winstatus;
+    // const gameclass = 'game-board win' + winstatus;
     return (
-      <div className="game">
-        <span>In development <span role="img" aria-label="emoji">😜</span></span> 
+      <div className='game'>
+        <span>In development <span role='img' aria-label='emoji'>😜</span></span> 
         {/* <div className={gameclass}>
           <Board 
             squares={current.squares}
             onClick={(i) => this.handleClick(i)}
           />
         </div>
-        <div className="game-info">
-          <div className="status">{status}</div>
+        <div className='game-info'>
+          <div className='status'>{status}</div>
           {moves()}
         </div> */}
       </div>

@@ -36,19 +36,19 @@ class Login extends React.Component {
     render() {
         if(!localStorage.getItem('Username')) {
             return (
-                <div className="Login">
+                <div className='Login'>
                     <form onSubmit={this.Login}>
                         <label>
                             Name:
-                            <input type="text" placeholder="Username" value={this.state.value} onChange={this.handleChange} />
+                            <input type='text' placeholder='Username' value={this.state.value} onChange={this.handleChange} />
                         </label>
-                        <button type="submit">Login</button>
+                        <button type='submit'>Login</button>
                     </form>
                 </div>
             )
         } else {
             return (
-                <div className="Login">
+                <div className='Login'>
                     <div>You've logged in...</div>
                     <Link to='/'><button>Go to Home</button></Link>
                     <button onClick={this.Logout}>Logout</button>

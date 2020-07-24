@@ -27,11 +27,22 @@
 }
 
 .gameplayer {
+    height: 25px;
     margin-bottom: 20px;
 }
 
 .game-board-online{
     margin: auto;
+}
+
+/* Modal overlay styling */
+.ModalOverlay {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px; 
+    background-color: rgba(0, 0, 0, 0.75);
 }
 
 /* styling inside modal */
@@ -70,11 +81,11 @@
 }
 
 /* chat design */
-.Modal .chatroom {
+.ChatModal .chatroom {
     margin-top: 60px;
 }
 
-.Modal .messagebox {
+.ChatModal .messagebox {
     width: calc(100% - 10px);
     margin: auto;
     border: 2px solid black;
@@ -85,13 +96,13 @@
     flex-direction: column-reverse;
 }
 
-.Modal h1 {
+.ChatModal h1 {
     float: left;
     margin: 0;
     font-size: 30px;
 }
 
-.Modal #Close-btn {
+.ChatModal #Close-btn {
     float: right;
     font-family: 'Pangolin', cursive;
     font-size: 30px;
@@ -101,23 +112,23 @@
     border-radius: 5px;
 }
 
-.Modal .chatroom input {
+.ChatModal .chatroom input {
     text-align: center;
     margin-top: 20px;
     width: calc(100% - 200px);
 }
 
-.Modal .chatroom .YourMessagediv {
+.ChatModal .chatroom .YourMessagediv {
     margin: 10px;
     text-align: right;
 }
 
-.Modal .chatroom .PartnerMessagediv {
+.ChatModal .chatroom .PartnerMessagediv {
     margin: 10px;
     text-align: left;
 }
 
-.Modal .chatroom .YourMessage {
+.ChatModal .chatroom .YourMessage {
     display: inline-block;
     border: 1px solid black;
     border-radius: 10px;
@@ -125,7 +136,7 @@
     word-break: break-all;
 }
 
-.Modal .chatroom .PartnerMessage {
+.ChatModal .chatroom .PartnerMessage {
     display: inline-block;
     border: 1px solid black;
     border-radius: 10px;
@@ -135,6 +146,43 @@
     word-break: break-all;
 }
 
+/* winpage design */
+.winModalOv {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.wonModal {
+    background-image: url("../Images/stars.gif");
+}
+
+.winModal {
+    top: 150px;
+    left: 0px;
+    right: 0px;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    animation-name: modalentry;
+    animation-duration: 3s;
+}
+
+@keyframes modalentry {
+    0%   {top: -4000px;}
+  }
+
+.winModal .Modaldiv {
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 4px;
+    background-color: white;
+    height: 200px;
+    width: 270px;
+    margin: auto;
+}
+
+.winModal .Modaldiv .wintitle h1 {
+    margin: 20px 0 25px;
+}
+
+/* media */
 @media (max-width: 450px) {
     .Modal .chatroom input {
         width: 90%;

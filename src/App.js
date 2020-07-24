@@ -42,7 +42,7 @@ function App() {
 
     return (
         <Router>
-            <div className="App">
+            <div className='App'>
                 <Nav user={user} />
                 <Switch>
                     <Route path='/' exact component={Home} />

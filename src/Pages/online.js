@@ -56,7 +56,6 @@ class Online extends React.Component {
                     this.props.socket.emit('Partnername1', {RoomId, username: this.state.username1});
                     this.props.socket.off('Partnername2');
                     this.setState({CreateroomModal: false});
-                    this.getnewmove();
                 });
             } else {
                 this.props.socket.off('createRoomconf');
@@ -80,7 +79,6 @@ class Online extends React.Component {
                     makeToast(username + ' joined');
                     this.setState({username2: username});
                     this.setState({JoinroomModal: false});
-                    this.getnewmove();
                 });
             } else {
                 makeToast('Enter valid room id');
@@ -104,26 +102,28 @@ class Online extends React.Component {
     }
 
     //to emit new move through socket
-    updatesquare() {
+    updatesquare(squares) {
         this.props.socket.emit('Room_move', {
             RoomId: this.state.RoomId,
-            squares: this.state.squares
+            squares: squares
         });
     }
 
     //listening for new moves
     getnewmove() {
         this.props.socket.on('newMove', ({squares}) => {
-            this.setState({
-                squares: squares,
-                move: !this.state.move
-            });
+            if(squares !== this.state.squares) {
+                this.setState({
+                    squares: squares,
+                    move: !this.state.move
+                });
+            }
         });
     }
 
     //Game handling
     handleClick(i){
-        const squares = this.state.squares;
+        const squares = this.state.squares.slice();
         var winner;
         const win = calculateWinner(squares);
         if(win) {
@@ -135,7 +135,9 @@ class Online extends React.Component {
             return;
         }
         squares[i] = this.state.XorO;
-        this.updatesquare();
+        if(squares !== this.state.squares) {
+            this.updatesquare(squares);
+        }
     }
 
     //listening for other user leaving room
@@ -167,6 +169,7 @@ class Online extends React.Component {
     }
 
     componentDidMount() {
+        this.getnewmove();
         this.leftroom();
         this.newgame();
         this.newmessage();
@@ -188,7 +191,7 @@ class Online extends React.Component {
             winner = null;
             winstatus = null; 
         }
-        const gameclass = "game-board game-board-online win" + winstatus;
+        const gameclass = 'game-board game-board-online win' + winstatus;
 
         const handlewinner = () => {
             let winner_title;
@@ -201,10 +204,17 @@ class Online extends React.Component {
             }
 
             return(
-                <Modal isOpen={true} contentLabel="Newgame" className="Modal">
-                    <div className="Modaldiv">
-                        <h1>{winner_title}</h1>
-                        <span>Want a rematch?</span>
+                <Modal 
+                    isOpen={true}
+                    contentLabel='Newgame'
+                    className='Modal winModal'
+                    overlayClassName={winner === this.state.XorO ? 'ModalOverlay winModalOv wonModal' : 'ModalOverlay winModalOv'}
+                >
+                    <div className='Modaldiv'>
+                        <div className='windiv'>
+                            <div className='wintitle'><h1>{winner_title}</h1></div>
+                            <div className='rematch'>Want a rematch?</div>
+                        </div>
                         <button onClick={() => this.props.socket.emit('Newgame', {RoomId: this.state.RoomId})}>New Game</button>
                     </div>
                 </Modal>
@@ -213,20 +223,25 @@ class Online extends React.Component {
 
         if(!this.state.RoomId) {
             return(
-                <div className="Online">
+                <div className='Online'>
                     <button className='btn' onClick={() => {
                         this.CreateRoom();
                         this.setState({CreateroomModal: true});
                         }}>Create Room</button>
                     <button className='btn' onClick={() => this.setState({JoinroomModal: true})}>Join Room</button>
-                    <Modal isOpen={this.state.JoinroomModal} contentLabel="JoinRoom" className="Modal">
-                        <div className="Modaldiv">
+                    <Modal 
+                        isOpen={this.state.JoinroomModal}
+                        contentLabel='JoinRoom'
+                        className='Modal joinModal'
+                        overlayClassName='ModalOverlay'
+                    >
+                        <div className='Modaldiv'>
                             <form onSubmit={this.JoinRoom}>
                                 <label>
                                     Room id:
-                                    <input type="text" placeholder="Room id" value={this.state.value} onChange={this.handleChange} />
+                                    <input type='text' placeholder='Room id' value={this.state.value} onChange={this.handleChange} />
                                 </label>
-                                <button type="submit">Join</button>
+                                <button type='submit'>Join</button>
                             </form>
                             <button onClick={() => this.setState({JoinroomModal: false})}>Close</button>
                         </div>
@@ -235,9 +250,14 @@ class Online extends React.Component {
             );
         } else if(!this.state.username2) {
             return(
-                <div className="Online">
-                    <Modal isOpen={this.state.CreateroomModal} contentLabel="CreateRoom" className="Modal">
-                        <div className="Modaldiv">
+                <div className='Online'>
+                    <Modal
+                        isOpen={this.state.CreateroomModal}
+                        contentLabel='CreateRoom'
+                        className='Modal createModal'
+                        overlayClassName='ModalOverlay'
+                    >
+                        <div className='Modaldiv'>
                             Room id: {this.state.RoomId}
                             <Loading />
                             Waiting for other players...
@@ -248,11 +268,11 @@ class Online extends React.Component {
             );
         } else {
             return(
-                <div className="Online-game">
+                <div className='Online-game'>
                     <div className='Players'>
                         {this.state.username1} <span>VS</span> {this.state.username2}
                     </div>
-                    {winner ? '' : <div className="gameplayer">{this.state.move ? 'Your move' : 'Opponent\'s move'}</div>}
+                    <div className='gameplayer'>{winner ? '' : this.state.move ? 'Your move' : 'Opponent\'s move'}</div>
                     <div className={gameclass} >
                         <Board 
                             squares={this.state.squares}
@@ -260,10 +280,16 @@ class Online extends React.Component {
                         />
                     </div>
                     <button className='btn' onClick={() => this.setState({ChatModal: true})}>Chat</button>
-                    <Modal isOpen={this.state.ChatModal} contentLabel="Chat" onRequestClose={() => this.setState({ChatModal: false})} className="Modal">
+                    <Modal
+                        isOpen={this.state.ChatModal}
+                        contentLabel='Chat'
+                        onRequestClose={() => this.setState({ChatModal: false})}
+                        className='Modal chatModal'
+                        overlayClassName='ModalOverlay'
+                    >
                         <h1>Chats</h1>
                         <button onClick={() => this.setState({ChatModal: false})} id='Close-btn'>X</button>
-                        <div className="Modaldiv">
+                        <div className='Modaldiv'>
                             <Chat 
                                 RoomId={this.state.RoomId}
                                 username1={this.state.username1}

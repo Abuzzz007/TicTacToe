@@ -32,11 +32,12 @@ class Chat extends React.Component {
 
     render() {
         return(
-            <div className="chatroom">
+            <div className='chatroom'>
                 <div className='messagebox'>
                     {this.props.messages.map((message, i) => (
                         <div key={i} 
-                            className={message.username === this.state.username1 ? 'YourMessagediv' : 'PartnerMessagediv'}>
+                            className={message.username === this.state.username1 ? 'YourMessagediv' : 'PartnerMessagediv'}
+                        >
                             <span 
                                 className={message.username === this.state.username1 ? 'YourMessage' : 'PartnerMessage'}
                             >{message.message}</span>
@@ -44,8 +45,8 @@ class Chat extends React.Component {
                     ))}
                 </div>
                 <form onSubmit={this.Sendmessage}>
-                    <input type="text" placeholder="Say somethin!" value={this.state.value} onChange={this.handleChange} />
-                    <button type="submit">Send</button>
+                    <input type='text' placeholder='Say somethin!' value={this.state.value} onChange={this.handleChange} />
+                    <button type='submit'>Send</button>
                 </form> 
             </div>          
         );

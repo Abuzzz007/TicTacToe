@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/nav.css';
-import user from "../Images/user.png";
+import user from '../Images/user.png';
 
 const logcheck = (props) => {
     const log = [];
     if(props.user) {
         log.push (
-            <div key="log-info">
+            <div key='log-info'>
                 <Link to='/login'>
                     <img src={user} alt={user}/>
                     <h2>{props.user}</h2>
@@ -16,7 +16,7 @@ const logcheck = (props) => {
         );
     } else {
         log.push (
-            <div key="log-info">
+            <div key='log-info'>
                 <Link to='/login'>
                     <h2>Login</h2>
                 </Link>
