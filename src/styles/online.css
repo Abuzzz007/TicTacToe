@@ -81,11 +81,11 @@
 }
 
 /* chat design */
-.ChatModal .chatroom {
+.chatModal .chatroom {
     margin-top: 60px;
 }
 
-.ChatModal .messagebox {
+.chatModal .messagebox {
     width: calc(100% - 10px);
     margin: auto;
     border: 2px solid black;
@@ -96,13 +96,13 @@
     flex-direction: column-reverse;
 }
 
-.ChatModal h1 {
+.chatModal h1 {
     float: left;
     margin: 0;
     font-size: 30px;
 }
 
-.ChatModal #Close-btn {
+.chatModal #Close-btn {
     float: right;
     font-family: 'Pangolin', cursive;
     font-size: 30px;
@@ -112,23 +112,23 @@
     border-radius: 5px;
 }
 
-.ChatModal .chatroom input {
+.chatModal .chatroom input {
     text-align: center;
     margin-top: 20px;
     width: calc(100% - 200px);
 }
 
-.ChatModal .chatroom .YourMessagediv {
+.chatModal .chatroom .YourMessagediv {
     margin: 10px;
     text-align: right;
 }
 
-.ChatModal .chatroom .PartnerMessagediv {
+.chatModal .chatroom .PartnerMessagediv {
     margin: 10px;
     text-align: left;
 }
 
-.ChatModal .chatroom .YourMessage {
+.chatModal .chatroom .YourMessage {
     display: inline-block;
     border: 1px solid black;
     border-radius: 10px;
@@ -136,7 +136,7 @@
     word-break: break-all;
 }
 
-.ChatModal .chatroom .PartnerMessage {
+.chatModal .chatroom .PartnerMessage {
     display: inline-block;
     border: 1px solid black;
     border-radius: 10px;
